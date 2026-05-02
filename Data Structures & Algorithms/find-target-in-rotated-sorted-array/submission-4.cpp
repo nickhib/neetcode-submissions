@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int right = nums.size()-1;
+        int left = 0;
+        while(right >= left)
+        {
+            int mid = left + (right-left)/2;
+            if(nums[mid] == target)
+                return mid;
+
+            //if were in the left portion we need to know
+            if(nums[mid] >= nums[left])//left portion
+            {
+                if(target < nums[left] ||target > nums[mid])
+                    left = mid+1;
+                else
+                    right = mid-1;
+            }
+            else//right portion
+            {
+                if(target < nums[mid] || target > nums[right])
+                    right = mid-1;
+                else
+                    left = mid+1;
+            }
+        }
+        return -1;
+
+    }
+};
